@@ -3,23 +3,23 @@ content %}
 <form method="POST">
   <h3 align="center">Sign Up</h3>
   <div class="form-group">
-    <label for="email">Email Address</label>
+    <label for="matric">Matric Number</label>
     <input
-      type="email"
+      type="numer"
       class="form-control"
-      id="email"
-      name="email"
-      placeholder="Enter email"
+      id="matric"
+      name="matric"
+      placeholder="Enter Matric Number"
     />
   </div>
   <div class="form-group">
-    <label for="firstName">First Name</label>
+    <label for="name">First Name</label>
     <input
       type="text"
       class="form-control"
-      id="firstName"
-      name="firstName"
-      placeholder="Enter first name"
+      id="name"
+      name="name"
+      placeholder="Enter name"
     />
   </div>
   <div class="form-group">
@@ -41,6 +41,26 @@ content %}
       name="password2"
       placeholder="Confirm password"
     />
+  </div>
+  <div>
+    <label for="tutor">Are you a Tutor?</label>
+    <p>
+    <input 
+     type="radio" 
+     name="tutor" 
+     id="tutor"
+     value= "Yes"
+     checked>Yes
+    </input>
+    </p>
+    <p>
+      <input 
+      type="radio" 
+      name="tutor"
+      id="tutor"
+      value= "No">No
+    </input>
+    </p>
   </div>
   <br />
   <button type="submit" class="btn btn-primary">Submit</button>
