@@ -39,6 +39,17 @@ def logout():
 def search():
     return render_template("search.html", user=current_user)
 
+@auth.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    return render_template("profile.html", user=current_user)
+
+@auth.route('/classes', methods=['GET', 'POST'])
+@login_required
+def classes():
+    #db.execute('SELECT * FROM ')
+    return render_template("classes.html", user=current_user)
+
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
