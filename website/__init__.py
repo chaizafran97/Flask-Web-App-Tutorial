@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
@@ -12,6 +13,7 @@ def create_app():
     app.config['SECRET_KEY'] = '970122'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
+    Bootstrap(app)
 
     from .views import views
     from .auth import auth
@@ -19,7 +21,7 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    from .models import Student, Tutors
+    from .models import User
 
     create_database(app)
 
@@ -29,7 +31,7 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(id):
-        return Student.query.get(int(id))
+        return User.query.get(int(id))
 
     return app
 

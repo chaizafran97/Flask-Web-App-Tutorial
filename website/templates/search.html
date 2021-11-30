@@ -1,6 +1,68 @@
 {% extends "base.html" %} {% block title %}Search{% endblock %} {% block content
     %}
-    <h1 align="center">Search</h1>
-    
-    {% endblock %}
-    
+    <h1 align="center">Search for available classes by course code here</h1>
+    <form method="POST" name="search">
+        <div class="form-group">
+            <label for="search">Input Course Code</label>
+            <input
+              type="text"
+              class="form-control"
+              id="courseCode"
+              name="courseCode"
+              placeholder="Enter the course code (eg. CSC4904)"
+            />
+          </div>
+          <button type="submit" 
+          value="search" 
+          name="search" 
+          class="btn btn-primary">Submit</button>
+    </form>
+    <body>
+        <form action="{{ url_for('auth.enrolled') }}" name="enrolled">
+        <div class="container">
+          <h1>{{ title }}</h1>
+          <hr>
+        <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Subject Code</th>
+        <th>Subject Name</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Click to Enroll</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for Lessons in query %}
+        <tr>
+          <td>{{ Lessons.subCode }}</td>
+          <td>{{ Lessons.subName }}</td>
+          <td>{{ Lessons.lesson_date }}</td>
+          <td>{{ Lessons.lesson_time }}</td>
+          <td><input type="submit" class="btn btn-primary" name="enrolled" value="Enroll"></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        columns: [
+          {searchable: true},
+          {searchable: true},
+          {orderable: false, searchable: false},
+          {orderable: false, searchable: false},
+        ],
+      });
+    });
+  </script>
+  </div>
+</form>
+  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"></script>
+</body>
+{% endblock %}
+        

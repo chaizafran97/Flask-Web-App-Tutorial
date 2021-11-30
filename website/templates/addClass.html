@@ -1,49 +1,49 @@
-{% extends "base.html" %} {% block title %}Add Class{% endblock %} {% block
-    content %}
-    <form method="POST">
+{% extends "base.html" %} {% block title %}Classes{% endblock %} {% block content
+  %}
+    <form method="POST" name="addClass">
       <h3 align="center">Add class to your profile here</h3>
       <div class="form-group">
-        <label for="matric">Subject Name</label>
+        <label for="subName">Subject Name</label>
         <input
           type="text"
           class="form-control"
-          id="subject_name"
-          name="subject_name"
+          id="subName"
+          name="subName"
           placeholder="Enter your subject name"
         />
       </div>
       <div class="form-group">
-        <label for="Subject Code">Subject Code</label>
+        <label for="subCode">Subject Code</label>
         <input
           type="text"
           class="form-control"
-          id="subject_code"
-          name="subject_code"
+          id="subCode"
+          name="subCode"
           placeholder="Enter your subject code"
         />
       </div>
       <div class="form-group">
-        <label for="password1">Password</label>
+        <label for="lesson_date">Lesson Date</label>
         <input
-          type="password"
+          type="text"
           class="form-control"
-          id="password1"
-          name="password1"
-          placeholder="Enter password"
+          id="lesson_date"
+          name="lesson_date"
+          placeholder="Enter the date of the class (dd-mm-yyyy)"
         />
       </div>
       <div class="form-group">
-        <label for="password2">Password (Confirm)</label>
+        <label for="lesson_time">Lesson Time</label>
         <input
-          type="password"
+          type="text"
           class="form-control"
-          id="password2"
-          name="password2"
-          placeholder="Confirm password"
+          id="lesson_time"
+          name="lesson_time"
+          placeholder="Enter the time of the class in 24 hours (hh:mm)"
         />
       </div>
       <br />
-      <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     {% endblock %}
     

@@ -1,6 +1,49 @@
 {% extends "base.html" %} {% block title %}Classes{% endblock %} {% block content
-    %}
+%}
     <h1 align="center">Your Upcoming Classes</h1>
-    
-    {% endblock %}
+    <body>
+        <div class="container">
+          <h1>{{ title }}</h1>
+          <hr>
+        <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Subject Code</th>
+        <th>Subject Name</th>
+        <th>Date</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for Lessons in query %}
+        <tr>
+          <td>{{ Lessons.subCode }}</td>
+          <td>{{ Lessons.subName }}</td>
+          <td>{{ Lessons.lesson_date }}</td>
+          <td>{{ Lessons.lesson_time }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        columns: [
+          {searchable: true},
+          {searchable: true},
+          {orderable: false, searchable: false},
+          {orderable: false, searchable: false},
+        ],
+      });
+    });
+  </script>
+{% endblock %}
+        </div>
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"></script>
+      </body>
+
     

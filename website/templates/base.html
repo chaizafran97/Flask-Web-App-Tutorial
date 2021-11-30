@@ -34,6 +34,9 @@
           <a class="nav-item nav-link" id="profile" href="/profile">Profile</a>
           <a class="nav-item nav-link" id="classes" href="/classes">Class</a>
           <a class="nav-item nav-link" id="search" href="/search">Search</a>
+          {% if user.role == tutor %}
+            <a class="nav-item nav-link" id="addClass" href="/addClass">Add Class</a>
+            {% endif %}
           <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
           {% else %}
           <a class="nav-item nav-link" id="login" href="/login">Login</a>
