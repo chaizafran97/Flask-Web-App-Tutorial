@@ -39,7 +39,8 @@
           <td>{{ Lessons.subName }}</td>
           <td>{{ Lessons.lesson_date }}</td>
           <td>{{ Lessons.lesson_time }}</td>
-          <td><input type="submit" class="btn btn-primary" name="enrolled" value="Enroll"></td>
+          <input id="lesson_id" name="lesson_id" type="hidden" value="{{ Lessons.id }}">
+          <td><button type="submit" name="enrolled" value="{{ Lessons.id }}" formmethod="post">Enroll</button></td>
         </tr>
       {% endfor %}
     </tbody>

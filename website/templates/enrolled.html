@@ -1,3 +1,29 @@
 {% extends "base.html" %} {% block title %}Classes{% endblock %} {% block content%}
     <h1 align="center">SUCCESS</h1>
+
+    <body>
+        <div class="container">
+          <h1>{{ title }}</h1>
+          <hr>
+        <table id="data" class="table table-striped">
+            <thead>
+              <tr>
+                <th>Subject Code</th>
+                <th>Subject Name</th>
+                <th>Date</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for Lesson_User in query %}
+                <tr>
+                  <td>{{ Lesson_User.lessonCode }}</td>
+                  <td>{{ Lesson_User.lessonName }}</td>
+                  <td>{{ Lesson_User.lessonDate }}</td>
+                  <td>{{ Lesson_User.lessonTime }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
     {% endblock %}

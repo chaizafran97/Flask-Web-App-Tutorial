@@ -1,8 +1,8 @@
+from sqlalchemy.sql.expression import column
 from . import db
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 from datetime import datetime
-
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -13,7 +13,6 @@ class User(db.Model, UserMixin):
     program = db.Column(db.String(5))
     email = db.Column(db.String(100))
     roles = db.Column(db.String(10))
-    lesson = db.Column(db.Integer, db.ForeignKey('lessons.id'))
 
 class Lessons(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -21,5 +20,11 @@ class Lessons(db.Model):
     subName = db.Column(db.String(150))
     lesson_date = db.Column(db.String(25))
     lesson_time = db.Column(db.String(25))
-    participants = db.relationship('User')
 
+class Lesson_User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    userMatric = db.Column(db.String(10))
+    lessonCode = db.Column(db.String(15))
+    lessonName = db.Column(db.String(150))
+    lessonDate = db.Column(db.String(25))
+    lessonTime = db.Column(db.String(25))

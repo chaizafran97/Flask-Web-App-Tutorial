@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User, Lessons
+from .models import User, Lessons, Lesson_User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -38,15 +38,18 @@ def search():
     if request.method == "POST":
         if request.form.get('search') == 'search':
             courseCode = request.form.get('courseCode')
-        elif request.form['enrolled'] == 'enrolled':
-            render_template("enrolled.html", user=current_user)
     return render_template("search.html", user=current_user, query=Lessons.query.filter_by(subCode=courseCode))
 
 @auth.route("/enrolled", methods=['GET', 'POST'])
 @login_required
 def enrolled():
-    
-    return render_template("enrolled.html", user=current_user)
+    if request.form.get("enrolled"):
+        lessonID = request.form.get('enrolled')
+        temp = Lessons.query.get(lessonID)
+        tempAdd = Lesson_User(userMatric=current_user.matric,lessonCode=temp.subCode,lessonName=temp.subName,lessonDate=temp.lesson_date,lessonTime=temp.lesson_time)
+        db.session.add(tempAdd)
+        db.session.commit()
+    return render_template("enrolled.html", user=current_user, query=Lesson_User.query.filter_by(userMatric=current_user.matric))
 
 @auth.route('/profile', methods=['GET', 'POST'])
 @login_required
