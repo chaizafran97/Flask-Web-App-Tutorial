@@ -11,7 +11,6 @@ def login():
     if request.method == 'POST':
         matric = request.form.get('matric')
         password = request.form.get('password')
-
         user = User.query.filter_by(matric=matric).first()
         if user:
             if check_password_hash(user.password, password):
@@ -51,14 +50,24 @@ def enrolled():
         db.session.commit()
     return render_template("enrolled.html", user=current_user, query=Lesson_User.query.filter_by(userMatric=current_user.matric))
 
-@auth.route('/profile', methods=['GET', 'POST'])
+@auth.route("/deleted", methods=['GET', 'POST'])
 @login_required
-def profile():
-    return render_template("profile.html", user=current_user)
+def deleted():
+    if request.form.get("deleted"):
+        lessonID = request.form.get('deleted')
+        Lesson_User.query.filter_by(id=lessonID).delete()
+        db.session.commit()
+    return render_template("deleted.html", user=current_user)
 
 @auth.route('/classes', methods=['GET', 'POST'])
 @login_required
 def classes():
+    if request.form.get("enrolled"):
+        lessonID = request.form.get('enrolled')
+        temp = Lessons.query.get(lessonID)
+        tempAdd = Lesson_User(userMatric=current_user.matric,lessonCode=temp.subCode,lessonName=temp.subName,lessonDate=temp.lesson_date,lessonTime=temp.lesson_time)
+        db.session.add(tempAdd)
+        db.session.commit()
     return render_template("classes.html", user=current_user, query=Lessons.query.all())
 
 @auth.route('/addClass', methods=['GET', 'POST'])

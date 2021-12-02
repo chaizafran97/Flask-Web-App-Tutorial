@@ -31,8 +31,7 @@
         <div class="navbar-nav">
           {% if user.is_authenticated %}
           <a class="nav-item nav-link" id="home" href="/">Home</a>
-          <a class="nav-item nav-link" id="profile" href="/profile">Profile</a>
-          <a class="nav-item nav-link" id="classes" href="/classes">Class</a>
+          <a class="nav-item nav-link" id="classes" href="/classes">All Classes</a>
           <a class="nav-item nav-link" id="search" href="/search">Search</a>
           {% if user.role == tutor %}
             <a class="nav-item nav-link" id="addClass" href="/addClass">Add Class</a>

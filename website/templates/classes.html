@@ -1,6 +1,7 @@
 {% extends "base.html" %} {% block title %}Classes{% endblock %} {% block content
 %}
-    <h1 align="center">Your Upcoming Classes</h1>
+    <h1 align="center">All Available Classes</h1>
+    <form action="{{ url_for('auth.enrolled') }}" name="enrolled">
     <body>
         <div class="container">
           <h1>{{ title }}</h1>
@@ -12,6 +13,7 @@
         <th>Subject Name</th>
         <th>Date</th>
         <th>Time</th>
+        <th>Click to Enroll</th>
       </tr>
     </thead>
     <tbody>
@@ -21,29 +23,15 @@
           <td>{{ Lessons.subName }}</td>
           <td>{{ Lessons.lesson_date }}</td>
           <td>{{ Lessons.lesson_time }}</td>
+          <input id="lesson_id" name="lesson_id" type="hidden" value="{{ Lessons.id }}">
+          <td><button type="submit" name="enrolled" value="{{ Lessons.id }}" formmethod="post">Enroll</button></td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
 {% endblock %}
-{% block scripts %}
-  <script>
-    $(document).ready(function () {
-      $('#data').DataTable({
-        columns: [
-          {searchable: true},
-          {searchable: true},
-          {orderable: false, searchable: false},
-          {orderable: false, searchable: false},
-        ],
-      });
-    });
-  </script>
-{% endblock %}
+</form>
         </div>
-        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"></script>
-      </body>
+        </body>
 
     

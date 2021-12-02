@@ -1,5 +1,34 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
 %}
 <h1 align="center">Welcome to IIUM Online Tutor Locator!</h1>
-
+<form action="{{ url_for('auth.deleted') }}" name="enrolled">
+    <body>
+        <div class="container">
+          <h1>{{ title }}</h1>
+          <hr>
+        <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Subject Code</th>
+        <th>Subject Name</th>
+        <th>Date</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for Lesson_User in query %}
+        <tr>
+          <td>{{ Lesson_User.lessonCode }}</td>
+          <td>{{ Lesson_User.lessonName }}</td>
+          <td>{{ Lesson_User.lessonDate }}</td>
+          <td>{{ Lesson_User.lessonTime }}</td>
+          <input id="lesson_id" name="lesson_id" type="hidden" value="{{ Lesson_User.id }}">
+          <td><button type="submit" name="deleted" value="{{ Lesson_User.id }}" formmethod="post">Cancel</button></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}
+</form>
+        </div>
+        </body>
