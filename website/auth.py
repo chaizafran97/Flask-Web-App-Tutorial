@@ -78,12 +78,14 @@ def addClass():
         subCode = request.form.get('subCode')
         lesson_date = request.form.get('lesson_date')
         lesson_time = request.form.get('lesson_time')
+        tutorName = request.form.get('tutorName')
+        notes = request.form.get('notes')
 
         new_sub = Lessons.query.filter_by(subName=subName).first()
         if len(subCode) < 3:
             flash('Subject code is too short!', category='error')
         else:
-            new_sub = Lessons(subCode=subCode, subName=subName, lesson_date=lesson_date, lesson_time=lesson_time)
+            new_sub = Lessons(subCode=subCode, subName=subName, lesson_date=lesson_date, lesson_time=lesson_time, tutorName=tutorName, notes=notes)
         db.session.add(new_sub)
         db.session.commit()
         flash('Lesson added!', category='success')

@@ -19,6 +19,8 @@ class Lessons(db.Model):
     subName = db.Column(db.String(150))
     lesson_date = db.Column(db.String(25))
     lesson_time = db.Column(db.String(25))
+    tutorName = db.Column(db.String(150))
+    notes = db.Column(db.String(5000))
 
 class Lesson_User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
