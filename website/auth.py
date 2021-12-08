@@ -3,6 +3,7 @@ from .models import User, Lessons, Lesson_User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
+from sqlalchemy import or_
 
 auth = Blueprint('auth', __name__)
 
@@ -37,7 +38,7 @@ def search():
     if request.method == "POST":
         if request.form.get('search') == 'search':
             courseCode = request.form.get('courseCode')
-    return render_template("search.html", user=current_user, query=Lessons.query.filter_by(subCode=courseCode))
+    return render_template("search.html", user=current_user, query = Lessons.query.filter((Lessons.tutorName.contains(courseCode)) | (Lessons.subCode==courseCode)))
 
 @auth.route("/enrolled", methods=['GET', 'POST'])
 @login_required
@@ -45,7 +46,7 @@ def enrolled():
     if request.form.get("enrolled"):
         lessonID = request.form.get('enrolled')
         temp = Lessons.query.get(lessonID)
-        tempAdd = Lesson_User(userMatric=current_user.matric,lessonCode=temp.subCode,lessonName=temp.subName,lessonDate=temp.lesson_date,lessonTime=temp.lesson_time)
+        tempAdd = Lesson_User(userMatric=current_user.matric,lessonCode=temp.subCode,lessonName=temp.subName,lessonDate=temp.lesson_date,lessonTime=temp.lesson_time,lessonTutor=temp.tutorName,lessonNotes=temp.notes)
         db.session.add(tempAdd)
         db.session.commit()
     return render_template("enrolled.html", user=current_user, query=Lesson_User.query.filter_by(userMatric=current_user.matric))

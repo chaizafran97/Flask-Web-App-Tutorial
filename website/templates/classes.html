@@ -13,6 +13,8 @@
         <th>Subject Name</th>
         <th>Date</th>
         <th>Time</th>
+        <th>Tutor</th>
+        <th>Notes</th>
         <th>Click to Enroll</th>
       </tr>
     </thead>
@@ -23,6 +25,8 @@
           <td>{{ Lessons.subName }}</td>
           <td>{{ Lessons.lesson_date }}</td>
           <td>{{ Lessons.lesson_time }}</td>
+          <td>{{ Lessons.tutorName }}</td>
+          <td>{{ Lessons.notes }}</td>
           <input id="lesson_id" name="lesson_id" type="hidden" value="{{ Lessons.id }}">
           <td><button type="submit" name="enrolled" value="{{ Lessons.id }}" formmethod="post">Enroll</button></td>
         </tr>

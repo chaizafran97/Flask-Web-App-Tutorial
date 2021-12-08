@@ -29,3 +29,5 @@ class Lesson_User(db.Model):
     lessonName = db.Column(db.String(150))
     lessonDate = db.Column(db.String(25))
     lessonTime = db.Column(db.String(25))
+    lessonTutor = db.Column(db.String(150))
+    lessonNotes = db.Column(db.String(5000))
