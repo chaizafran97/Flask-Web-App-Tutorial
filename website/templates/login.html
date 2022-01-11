@@ -1,7 +1,14 @@
 {% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
 %}
 <form method="POST">
-  <h3 align="center">Login</h3>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img src="https://c8.alamy.com/comp/PPATR6/high-school-tutor-giving-male-student-one-to-one-tuition-at-desk-PPATR6.jpg" class="img-fluid" alt="...">
+      Are you struggling in your courses? Register for IIUM's Online Tutor Locator to look for help!
+    </div>
+    <div class="col" >
+      <h3 align="center">Login</h3>
   <div class="form-group">
     <label for="matric">Matric Number</label>
     <input
@@ -23,9 +30,14 @@
     />
   </div>
   <br />
-  <button type="submit" class="btn btn-primary">Login</button>
+  <div class="text-center">
+  <button  type="submit" class="btn btn-primary">Login</button>
 </form>
-<form action="{{ url_for('auth.sign_up') }}">
+<form action="{{ url_for('auth.signUpOptions') }}">
   <br/>
-<button type="submit" class="btn btn-primary" name="signup" >Sign Up</button></form>
+<button  type="submit" class="btn btn-primary" name="signup" >Sign Up</button></form>
+</div>
+</div>
+</div>
+</div>
 {% endblock %}

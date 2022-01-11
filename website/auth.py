@@ -46,7 +46,7 @@ def enrolled():
     if request.form.get("enrolled"):
         lessonID = request.form.get('enrolled')
         temp = Lessons.query.get(lessonID)
-        tempAdd = Lesson_User(userMatric=current_user.matric,lessonCode=temp.subCode,lessonName=temp.subName,lessonDate=temp.lesson_date,lessonTime=temp.lesson_time,lessonTutor=temp.tutorName,lessonNotes=temp.notes)
+        tempAdd = Lesson_User(userMatric=current_user.matric,lessonCode=temp.subCode,lessonName=temp.subName,lessonDate=temp.lesson_date,lessonTutor=temp.tutorName,lessonNotes=temp.notes)
         db.session.add(tempAdd)
         db.session.commit()
     return render_template("enrolled.html", user=current_user, query=Lesson_User.query.filter_by(userMatric=current_user.matric))
@@ -66,7 +66,7 @@ def classes():
     if request.form.get("enrolled"):
         lessonID = request.form.get('enrolled')
         temp = Lessons.query.get(lessonID)
-        tempAdd = Lesson_User(userMatric=current_user.matric,lessonCode=temp.subCode,lessonName=temp.subName,lessonDate=temp.lesson_date,lessonTime=temp.lesson_time)
+        tempAdd = Lesson_User(userMatric=current_user.matric,lessonCode=temp.subCode,lessonName=temp.subName,lessonDate=temp.lesson_date)
         db.session.add(tempAdd)
         db.session.commit()
     return render_template("classes.html", user=current_user, query=Lessons.query.all())
@@ -78,7 +78,6 @@ def addClass():
         subName = request.form.get('subName')
         subCode = request.form.get('subCode')
         lesson_date = request.form.get('lesson_date')
-        lesson_time = request.form.get('lesson_time')
         tutorName = request.form.get('tutorName')
         notes = request.form.get('notes')
 
@@ -86,11 +85,16 @@ def addClass():
         if len(subCode) < 3:
             flash('Subject code is too short!', category='error')
         else:
-            new_sub = Lessons(subCode=subCode, subName=subName, lesson_date=lesson_date, lesson_time=lesson_time, tutorName=tutorName, notes=notes)
+            new_sub = Lessons(subCode=subCode, subName=subName, lesson_date=lesson_date, tutorName=tutorName, notes=notes)
         db.session.add(new_sub)
         db.session.commit()
         flash('Lesson added!', category='success')
     return render_template("addClass.html", user=current_user)
+
+@auth.route('/SignUpOptions')
+def signUpOptions():
+
+    return render_template("signUpOptions.html", user=current_user)
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():

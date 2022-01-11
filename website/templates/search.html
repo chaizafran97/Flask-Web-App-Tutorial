@@ -3,13 +3,13 @@
     <h1 align="center">Search for available classes by course code or tutor name</h1>
     <form method="POST" name="search">
         <div class="form-group">
-            <label for="search">Input Course Code</label>
+            <label for="search">Input Course Code or Tutor</label>
             <input
               type="text"
               class="form-control"
               id="courseCode"
               name="courseCode"
-              placeholder="Enter the course code (eg. CSC4904)"
+              placeholder="Enter the course code (eg. CSC4904) or tutor's name"
             />
           </div>
           <button type="submit" 
@@ -28,7 +28,6 @@
         <th>Subject Code</th>
         <th>Subject Name</th>
         <th>Date</th>
-        <th>Time</th>
         <th>Tutor</th>
         <th>Notes</th>
         <th>Click to Enroll</th>
@@ -40,7 +39,6 @@
           <td>{{ Lessons.subCode }}</td>
           <td>{{ Lessons.subName }}</td>
           <td>{{ Lessons.lesson_date }}</td>
-          <td>{{ Lessons.lesson_time }}</td>
           <td>{{ Lessons.tutorName }}</td>
           <td>{{ Lessons.notes }}</td>
           <input id="lesson_id" name="lesson_id" type="hidden" value="{{ Lessons.id }}">
