@@ -1,7 +1,13 @@
-{% extends "baseTutor.html" %} {% block title %}Classes{% endblock %} {% block content
-    %}
-    <h1 align="center">Welcome to IIUM Online Tutor Locator!</h1>
-    <h2 align="center">Upcoming Classes</h2>
+{% if user.roles == 'student': %}
+  {% extends "base.html" %} 
+{% else: %}
+  {% extends "baseTutor.html" %}
+{% endif %}
+{% block title %}Home{% endblock %} {% block content
+%}
+<h1 align="center">Welcome to IIUM Online Tutor Locator!</h1>
+<h2 align="center">Welcome, {% print(user.name)%}</h2>
+<h5>Here are your upcoming classes</h5>
 <form action="{{ url_for('auth.deleted') }}" name="enrolled">
     <body>
         <div class="container">
@@ -13,8 +19,8 @@
         <th>Subject Code</th>
         <th>Subject Name</th>
         <th>Date</th>
-        <th>Tutor</th>
-        <th>Notes</th>
+        <th>Students</th>
+        <th>Matric No.</th>
       </tr>
     </thead>
     <tbody>
@@ -24,14 +30,14 @@
           <td>{{ Lesson_User.lessonName }}</td>
           <td>{{ Lesson_User.lessonDate }}</td>
           <td>{{ Lesson_User.lessonTutor }}</td>
-          <td>{{ Lesson_User.lessonNotes }}</td>
+          <td>{{  }}</td>
           <input id="lesson_id" name="lesson_id" type="hidden" value="{{ Lesson_User.id }}">
           <td><button type="submit" name="deleted" value="{{ Lesson_User.id }}" formmethod="post">Cancel</button></td>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-{% endblock %}
+        {% endfor %}
+        </tbody>
+        </table>
 </form>
         </div>
         </body>
+{% endblock %}

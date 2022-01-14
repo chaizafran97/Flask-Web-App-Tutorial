@@ -1,4 +1,8 @@
-{% extends "base.html" %} {% block title %}Classes{% endblock %} {% block content
+{% if user.roles == 'student': %}
+  {% extends "base.html" %} 
+{% else: %}
+  {% extends "baseTutor.html" %}
+{% endif %} {% block title %}Classes{% endblock %} {% block content
 %}
     <h1 align="center">All Available Classes</h1>
     <form action="{{ url_for('auth.enrolled') }}" name="enrolled">

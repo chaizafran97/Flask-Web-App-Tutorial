@@ -1,4 +1,8 @@
-{% extends "base.html" %} {% block title %}Add Classes{% endblock %} {% block content
+{% if user.roles == 'student': %}
+  {% extends "base.html" %} 
+{% else: %}
+  {% extends "baseTutor.html" %}
+{% endif %} {% block title %}Add Classes{% endblock %} {% block content
   %}
     <form method="POST" name="addClass">
       <h3 align="center">Add class to your profile here</h3>

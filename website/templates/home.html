@@ -1,6 +1,13 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+{% if user.roles == 'student': %}
+  {% extends "base.html" %} 
+{% else: %}
+  {% extends "baseTutor.html" %}
+{% endif %}
+{% block title %}Home{% endblock %} {% block content
 %}
 <h1 align="center">Welcome to IIUM Online Tutor Locator!</h1>
+<h2 align="center">Welcome, {% print(user.name)%}</h2>
+<h5>Here are your upcoming classes</h5>
 <form action="{{ url_for('auth.deleted') }}" name="enrolled">
     <body>
         <div class="container">
@@ -27,10 +34,10 @@
           <input id="lesson_id" name="lesson_id" type="hidden" value="{{ Lesson_User.id }}">
           <td><button type="submit" name="deleted" value="{{ Lesson_User.id }}" formmethod="post">Cancel</button></td>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-{% endblock %}
+        {% endfor %}
+        </tbody>
+        </table>
 </form>
         </div>
         </body>
+{% endblock %}
