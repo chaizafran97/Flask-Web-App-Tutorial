@@ -17,12 +17,15 @@ def login():
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
-                return redirect(url_for('views.home'))
+                if user.roles == 'student':
+                    return render_template("home.html", user=current_user)
+                else:   
+                    return render_template("tutorHome.html", user=current_user)
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
             flash('Matric number is not registered', category='error')
-
+    
     return render_template("login.html", user=current_user)
 
 @auth.route('/logout')
@@ -96,6 +99,10 @@ def signUpOptions():
 
     return render_template("signUpOptions.html", user=current_user)
 
+@auth.route('/tutorHome')
+def tutorHome():
+    return render_template("tutorHome.html")    
+
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
@@ -130,3 +137,38 @@ def sign_up():
             return redirect(url_for('views.home'))    
 
     return render_template("sign_up.html", user=current_user)
+
+@auth.route('/sign-upTutor', methods=['GET', 'POST'])
+def sign_upTutor():
+    if request.method == 'POST':
+        matric = request.form.get('matric')
+        name = request.form.get('name')
+        password1 = request.form.get('password1')
+        password2 = request.form.get('password2')
+        kulliyah = request.form.get('kulliyah')
+        program = request.form.get('program')
+        email = request.form.get('email')
+
+        user = User.query.filter_by(matric=matric).first()
+        if user:
+            flash('Matric number has been registered', category='error')
+        elif name is None:
+            flash('Name must be greater than 1 character.', category='error')
+        elif password1 != password2:
+            flash('Passwords don\'t match.', category='error')
+        elif len(password1) < 7:
+            flash('Password must be at least 7 characters.', category='error')
+        else:
+            if len(matric) == 7:
+                new_user = User(matric=matric, name=name, password=generate_password_hash(
+                password1, method='sha256'), kulliyah=kulliyah, program=program, email=email, roles="student")
+            else:
+                new_user = User(matric=matric, name=name, password=generate_password_hash(
+                password1, method='sha256'), kulliyah=kulliyah, program=program, email=email, roles="tutor")
+            db.session.add(new_user)
+            db.session.commit()
+            login_user(new_user, remember=True)
+            flash('Account created!', category='success')
+            return redirect(url_for('auth.tutorHome'))    
+
+    return render_template("sign_upTutor.html", user=current_user)

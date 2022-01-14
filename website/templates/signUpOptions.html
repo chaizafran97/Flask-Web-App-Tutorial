@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %}Classes{% endblock %} {% block content
+{% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block content
     %}
 
     <div class="container">
@@ -12,7 +12,7 @@
                       </svg>
                   <h5 class="card-title">Sign Up As Tutor</h5>
                   <p class="card-text">Find jobs and fulfill your dream of educating the future generation</p>
-                  <form action="{{ url_for('auth.sign_up') }}">
+                  <form action="{{ url_for('auth.sign_upTutor') }}">
                     <br/>
                   <button type="submit" class="btn btn-primary" name="signup" >Sign Up</button></form>
                 </div>
@@ -29,7 +29,7 @@
                   <p class="card-text">Discover great tutors who are willing to help you out</p>
                   <form action="{{ url_for('auth.sign_up') }}">
                     <br/>
-                  <button type="submit" class="btn btn-primary" name="signup" >Sign Up</button></form>
+                  <button type="submit" class="btn btn-primary" name="signupTutor" >Sign Up</button></form>
                 </div>
               </div>
           </div>
