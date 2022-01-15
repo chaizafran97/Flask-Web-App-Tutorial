@@ -20,7 +20,6 @@
         <th>Subject Name</th>
         <th>Date</th>
         <th>Students</th>
-        <th>Matric No.</th>
       </tr>
     </thead>
     <tbody>
@@ -29,8 +28,7 @@
           <td>{{ Lesson_User.lessonCode }}</td>
           <td>{{ Lesson_User.lessonName }}</td>
           <td>{{ Lesson_User.lessonDate }}</td>
-          <td>{{ Lesson_User.lessonTutor }}</td>
-          <td>{{ Lesson_User.lessonDate }}</td>
+          <td>{{ Lesson_User.userMatric }}</td>
           <input id="lesson_id" name="lesson_id" type="hidden" value="{{ Lesson_User.id }}">
           <td><button type="submit" name="deleted" value="{{ Lesson_User.id }}" formmethod="post">Cancel</button></td>
         </tr>

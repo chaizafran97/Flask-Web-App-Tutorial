@@ -18,9 +18,9 @@ def login():
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
                 if user.roles == 'student':
-                    return render_template("home.html", user=current_user)
+                    return render_template("home.html", user=current_user, query=Lesson_User.query.filter_by(userMatric=current_user.matric))
                 else:   
-                    return render_template("tutorHome.html", user=current_user)
+                    return render_template("tutorHome.html", user=current_user, query = Lesson_User.query.filter(Lesson_User.lessonTutor==user.name))
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
@@ -42,6 +42,11 @@ def search():
         if request.form.get('search') == 'search':
             courseCode = request.form.get('courseCode')
     return render_template("search.html", user=current_user, query = Lessons.query.filter((Lessons.tutorName.contains(courseCode)) | (Lessons.subCode==courseCode)))
+
+@auth.route('/tutorHome')
+def tutorHome():
+    user=current_user
+    return render_template("tutorHome.html", user=current_user, query = Lesson_User.query.filter(Lesson_User.tutorName==current_user))   
 
 @auth.route("/enrolled", methods=['GET', 'POST'])
 @login_required
@@ -77,11 +82,12 @@ def classes():
 @auth.route('/addClass', methods=['GET', 'POST'])
 @login_required
 def addClass():
+    user=current_user
     if request.method == 'POST':
         subName = request.form.get('subName')
         subCode = request.form.get('subCode')
         lesson_date = request.form.get('lesson_date')
-        tutorName = request.form.get('tutorName')
+        tutorName = user.name
         notes = request.form.get('notes')
 
         new_sub = Lessons.query.filter_by(subName=subName).first()
@@ -98,10 +104,7 @@ def addClass():
 def signUpOptions():
 
     return render_template("signUpOptions.html", user=current_user)
-
-@auth.route('/tutorHome')
-def tutorHome():
-    return render_template("tutorHome.html")    
+ 
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():

@@ -1,4 +1,8 @@
-{% extends "base.html" %} {% block title %}Search{% endblock %} {% block content
+{% if user.roles == 'student': %}
+  {% extends "base.html" %} 
+{% else: %}
+  {% extends "baseTutor.html" %}
+{% endif %} {% block title %}Search{% endblock %} {% block content
     %}
     <h1 align="center">Search for available classes by course code or tutor name</h1>
     <form method="POST" name="search">
