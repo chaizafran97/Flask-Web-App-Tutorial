@@ -46,7 +46,7 @@ def search():
 @auth.route('/tutorHome')
 def tutorHome():
     user=current_user
-    return render_template("tutorHome.html", user=current_user, query = Lesson_User.query.filter(Lesson_User.tutorName==current_user))   
+    return render_template("tutorHome.html", user=current_user, query = Lesson_User.query.filter(Lesson_User.lessonTutor==current_user.name))   
 
 @auth.route("/enrolled", methods=['GET', 'POST'])
 @login_required
